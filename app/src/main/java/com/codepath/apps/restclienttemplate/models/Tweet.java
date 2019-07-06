@@ -13,8 +13,10 @@ public class Tweet {
     public long uid; //database ID for the tweet
     public User user;
     public String createdAt;
+    //public Entities entities;
 
     public Tweet(){}
+
 
     //deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
@@ -25,6 +27,7 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        //tweet.entities = Entities.fromJSON(jsonObject.getJSONObject("extended_entities"));
         return tweet;
 
     }

@@ -26,6 +26,8 @@ public class ComposeActivity extends AppCompatActivity {
     ArrayAdapter<String> tweetAdapter; //List view and Recycler view are views that show data
     private final int REQUEST_CODE = 20;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +35,13 @@ public class ComposeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         client = TwitterApp.getRestClient(this); //gives access to send tweet function to client
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-
+        setTitle("Compose Tweet");
         Button button = findViewById(R.id.sendTweet);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText etNewItem = (EditText) findViewById(R.id.et_simple);
+                ///Potential Character count code
                 String itemText = etNewItem.getText().toString();
                 etNewItem.setText("");
                 client.sendTweet(itemText, new JsonHttpResponseHandler(){

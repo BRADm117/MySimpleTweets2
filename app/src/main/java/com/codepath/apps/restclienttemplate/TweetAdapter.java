@@ -26,7 +26,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         mTweets = tweets;
     }
 
-    //for each ow, inflate the layout and ache references into ViewHolder
+    //for each row, inflate the layout and ache references into ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {//only done when creating new row
@@ -54,6 +54,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         holder.tvTimestamp.setText(getRelativeTimeAgo(tweet.createdAt));
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
+        //Glide.with(context).load(tweet.entities.mediaImageUrl).into(holder.ivMedia);
 
     }
 
@@ -69,6 +70,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public TextView tvUserName; //matches xml name
         public TextView tvBody; //matches xml name
         public TextView tvTimestamp;
+        //public ImageView ivMedia;///MEDIA
 
         public ViewHolder(View itemView){ //constructor takes inflated view as parameter
             //called before binder
@@ -79,6 +81,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTimestamp = (TextView) itemView.findViewById(R.id.tvTimestamp);
+            //ivMedia = (ImageView) itemView.findViewById(R.id.ivMedia);
 
 
 
@@ -104,6 +107,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         }
 
         return relativeDate;
+    }
+    // Clean all elements of the recycler
+    public void clear() {
+        mTweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        mTweets.addAll(list);
+        notifyDataSetChanged();
     }
 
 }
